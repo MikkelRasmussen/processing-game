@@ -1,6 +1,6 @@
 ArrayList<Target> targets = new ArrayList<Target>();
 
-
+UI UI = new UI();;
 
 Player player;
 GameHandler gamehandler = new GameHandler();
@@ -11,7 +11,7 @@ void setup() {
   for (int i = 0; i < 7; i++) {
     targets.add(new Target(i*100, random(30, 300), 40, 15, 2));
   }
-  player = new Player(100, height-100, 20, 50, 5);
+  player = new Player(100, height-150, 20, 50, 5);
 
   player.setup();
 }
@@ -36,10 +36,11 @@ void draw() {
     player.checkEdges();
     player.display();
 
-    gamehandler.score();
     gamehandler.spawnTarget();
     gamehandler.gameScreen();
-
+    
+    UI.update();
+    
     break;  
 
   case "resetScreen":

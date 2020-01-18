@@ -1,30 +1,21 @@
 class GameHandler {
 
-  int score;
+  int spawnrate;
   int gsec;
-  int endsec;
   int time;
-
-  boolean start = true;
+  int startHealth = UI.health;
+  boolean start = false;
   boolean state = false;
 
   String mode = "startScreen";
 
   GameHandler() {
 
-    score = 0;
-    time = 120;
+    time = 30;
   }
-
-
-  void score() {
-    textSize(32);
-    text("Score:" +score, width/2-60, height-120);
-  }
-
   void spawnTarget() {
-    if (millis() - gsec > 1250) {
-      gsec = millis();
+    if (millis() - spawnrate > 1250) {
+      spawnrate = millis();
       state = !state;
     }
 
@@ -52,15 +43,21 @@ class GameHandler {
   void gameScreen() {
     if (start) {
       start = false;
-      endsec = millis();
-      score = 0;
+      gsec = millis();
+      UI.score = 0;
+      UI.health = startHealth;
     }
-    text("Time left:" + (60-((millis()-endsec)/1000)), width/2-60, height-160);
-    println((millis()-endsec)/1000);
-
-    if ((millis()-endsec)/1000 > 60) {
+    
+    if(UI.health > 0 ){
+      if((millis()-gsec) >= 100){
+       UI.health = UI.health - startHealth/time/10;
+       gsec = millis();
+      }
+    }
+    
+    if (UI.health <= 0 ) {
       mode = "resetScreen";
-    }
+    } 
   }
   void resetScreen() {
     if (keyPressed) {
@@ -70,7 +67,7 @@ class GameHandler {
       }
     }
     textSize(48);
-    text("Score:" +score, width/2-100, height/2-100);
+    text("Score:" +UI.score, width/2-100, height/2-100);
     text("Press Enter to go to Main Screen", 25, height/2);
   }
 }

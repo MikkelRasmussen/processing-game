@@ -93,9 +93,9 @@ class Player {
           currentTarget.location.y <= currentBullet.location.y + currentBullet.size.y) {
 
           if (currentTarget.location.y < 100) {
-            gamehandler.score =  gamehandler.score + 2;
+            UI.score =  UI.score + 2;
           } else {
-            gamehandler.score++;
+            UI.score++;
           }
 
           targets.remove(o);
