@@ -26,7 +26,7 @@ void draw() {
     background(100, 220, 220);
 
     for (Target target : targets) {
-      target.move();
+      target.update();
       target.checkEdges();
       target.display();
     }

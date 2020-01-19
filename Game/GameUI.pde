@@ -35,6 +35,6 @@ class UI {
 
   void score() {
     textSize(32);
-    text("Score: " +score, width-150, height-24);
+    text("Score: " +score, width-180, height-24);
   }
 }

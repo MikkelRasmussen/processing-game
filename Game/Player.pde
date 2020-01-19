@@ -29,7 +29,7 @@ class Player {
       } else if (keyCode == RIGHT) {
         location.add(speed);
       } else if ((keyCode == UP) && (state)) {
-        Bullet temp = new Bullet(location.x, location.y-10, 10, 20, -10);
+        Bullet temp = new Bullet(location.x+5, location.y-10, 10, 20, -10);
         bullets.add(temp);
         keyPressed = false;
         state = !state;
