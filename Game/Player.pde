@@ -92,6 +92,12 @@ class Player {
           currentTarget.location.y + currentTarget.size.y >= currentBullet.location.y &&
           currentTarget.location.y <= currentBullet.location.y + currentBullet.size.y) {
 
+          if (currentTarget.healthBonus) {
+            UI.health = UI.health + 30;
+          } else if (currentTarget.damageBonus) {
+            UI.health = UI.health - 30;
+          }
+
           if (currentTarget.location.y < 100) {
             UI.score =  UI.score + 2;
           } else {

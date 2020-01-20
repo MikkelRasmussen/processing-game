@@ -8,11 +8,13 @@ class Target {
   float constant;
 
   boolean state;
+  boolean healthBonus = false;
+  boolean damageBonus = false;
 
   int gsec;
 
 
-  Target(float x, float y, float w, float h, float s) {
+  Target(float x, float y, float w, float h, float s, boolean bH, boolean bD) {
 
     location = new PVector(x, y);
     size =  new PVector(w, h);
@@ -20,6 +22,9 @@ class Target {
     acceleration = new PVector(0, 0);
 
     constant = random(0.01, 0.03);
+
+    healthBonus = bH;
+    damageBonus = bD;
 
     gsec = int(random(0, 2500));
   }
@@ -38,12 +43,11 @@ class Target {
   }
 
   void checkedges() {
-    if (location.y < 25){
+    if (location.y < 25) {
       state = true;
       gsec = millis();
       acceleration.mult(0);
-    }
-    else if(location.y > 350){
+    } else if (location.y > 350) {
       state = false;
       gsec = millis();
       acceleration.mult(0);
@@ -67,6 +71,18 @@ class Target {
   }
 
   void display() {
-    rect(location.x, location.y, size.x, size.y);
+    if (healthBonus) {
+      fill(0, 222, 0);
+      rect(location.x, location.y, size.x, size.y);
+      fill(255);
+    }
+    else if (damageBonus) {
+      fill(222, 0, 0);
+      rect(location.x, location.y, size.x, size.y);
+      fill(255);
+    } else {
+      fill(255);
+      rect(location.x, location.y, size.x, size.y);
+    }
   }
 }

@@ -17,7 +17,7 @@ class UI {
 
 
   void display() {
-    fill(20, 20, 20);
+    fill(69, 69, 69);
     rect(0, height-70, width, 70);
     fill(255);
   }

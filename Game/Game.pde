@@ -9,7 +9,7 @@ void setup() {
   size(800, 600);
 
   for (int i = 0; i < 7; i++) {
-    targets.add(new Target(i*100, random(30, 300), 40, 15, 2));
+    targets.add(new Target(i*100, random(30, 300), 40, 15, 2, false, false));
   }
   player = new Player(100, height-150, 20, 50, 5);
 

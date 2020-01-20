@@ -14,13 +14,21 @@ class GameHandler {
     time = 30;
   }
   void spawnTarget() {
-    if (millis() - spawnrate > 1250) {
+    if (millis() - spawnrate > 750) {
       spawnrate = millis();
       state = !state;
     }
 
     if (state) {
-      targets.add(new Target(random(10, 300), random(10, 300), 40, 15, 2));
+      float r = random(1);
+
+      if (r <= 0.15){
+        targets.add(new Target(random(10, 300), random(10, 300), 40, 15, 2, true, false));
+      } else if ((r > 0.15) && (r < 0.30)) {
+        targets.add(new Target(random(10, 300), random(10, 300), 40, 15, 2, false, true));
+      } else {
+        targets.add(new Target(random(10, 300), random(10, 300), 40, 15, 2, false, false));
+      }
       state = !state;
     }
   }
@@ -47,17 +55,17 @@ class GameHandler {
       UI.score = 0;
       UI.health = startHealth;
     }
-    
-    if(UI.health > 0 ){
-      if((millis()-gsec) >= 100){
-       UI.health = UI.health - startHealth/time/10;
-       gsec = millis();
+
+    if (UI.health > 0 ) {
+      if ((millis()-gsec) >= 100) {
+        UI.health = UI.health - startHealth/time/10;
+        gsec = millis();
       }
     }
-    
+
     if (UI.health <= 0 ) {
       mode = "resetScreen";
-    } 
+    }
   }
   void resetScreen() {
     if (keyPressed) {
